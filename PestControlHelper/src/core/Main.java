@@ -60,18 +60,18 @@ public Area lumbridge = new Area(3217, 3224, 3226, 3214);
 			antiBan();
 		}else{
 
-		if(getGroundItems().closest("Cowhide") != null){
-			log("cowhide spotted, looting");
+		/*if(getGroundItems().closest("Cowhide") != null){
+		log("cowhide spotted, looting");
 			getGroundItems().closest("Cowhide").interact("Take");
-			sleepUntil(() -> getLocalPlayer().isStandingStill(), Calculations.random(1200, 3000));}
-		}
+		sleepUntil(() -> getLocalPlayer().isStandingStill(), Calculations.random(1200, 3000));}
+		*/
 			NPC cow;
 			cow = getNpcs().closest(npc -> npc != null && npc.getName() != null && npc.getName().equals("Cow") && !npc.isInCombat() && npc.getInteractingCharacter() == null);
-			if(cow != null && !cow.isInCombat()){
+			if(cow != null && !cow.isInCombat() && !getPlayers().myPlayer().isInCombat()){
 				log("cows here, trying to attack");
 				cow.interact("Attack");
 			}
-		
+		}
 		
 		
 		if(getInventory().isFull()){
@@ -118,7 +118,8 @@ public Area lumbridge = new Area(3217, 3224, 3226, 3214);
 	
 	public void antiBan() {
 		int random = Calculations.random(1, 250);
-
+		
+		
 		if (random == 1) {
 		if (!getTabs().isOpen(Tab.STATS)) {
 		getTabs().open(Tab.STATS);
