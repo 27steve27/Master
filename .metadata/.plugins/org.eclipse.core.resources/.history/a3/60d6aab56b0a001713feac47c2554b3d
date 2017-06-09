@@ -1,0 +1,15 @@
+
+public class MainClass {
+
+
+	private static String Allyson;
+
+	public static void main(String[] args){
+	Character steve = new Character();
+	
+	steve.sprayWindex(Allyson, 4);
+	
+	
+	}
+	
+}

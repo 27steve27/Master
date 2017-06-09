@@ -1,0 +1,80 @@
+package main;
+
+import org.dreambot.api.methods.Calculations;
+import org.dreambot.api.script.AbstractScript;
+import org.dreambot.api.script.ScriptManifest;
+import org.dreambot.api.wrappers.interactive.NPC;
+import org.dreambot.api.script.Category;
+
+@ScriptManifest(author = "itspeaches", name = "Cow Killer", version = 1.0, description = "Kills cows south of Falador, banks hides", category = Category.COMBAT)
+public class main extends AbstractScript {
+
+public int currentstate;
+	public void onStart() {
+		currentstate = 1;
+		log("Thank you for killing the cows");
+	}
+	
+	private enum State {
+		FIGHT, DEATHWALK, BANK, WAIT
+	};
+
+	private State getState() {
+	        if (currentstate == 1)
+	            return State.FIGHT;
+	        if (currentstate == 2)
+	            return State.BANK;
+	        if(currentstate == 3)
+	        	return State.DEATHWALK;
+	        return State.WAIT;
+	    }
+
+	public void onExit() {
+
+	}
+
+	@SuppressWarnings({ "deprecation", "incomplete-switch" })
+	@Override
+	public int onLoop() {
+		switch (getState()) {
+		case FIGHT:
+		if(getPlayers().myPlayer().isInCombat()){
+			sleep(Calculations.random(300, 1258));
+		}else{
+		
+		if(getGroundItems().closest("Cowhide") != null){
+			getGroundItems().closest("Cowhide").interact("Take");
+		}else{
+			NPC cow;
+			cow = getNpcs().closest("cow");
+			
+			if(cow != null && !cow.isInCombat()){
+				cow.interact("Attack");
+			}
+		}
+		}
+		
+		if(getInventory().isFull()){
+			currentstate = 2;
+		}
+			break;
+		case BANK:
+			if(getInventory().isFull()){
+				getBank().openClosest();
+				sleep(455, 2241);
+			}
+			
+			if(getBank().isOpen()){
+				getBank().depositAll("Cowhide");
+				sleep(100);
+				getBank().close();
+			}
+			
+			break;
+		case WAIT:
+//code to wait here
+			break;
+		}
+		return Calculations.random(500, 600);
+	}
+}

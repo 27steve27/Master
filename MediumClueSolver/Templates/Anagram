@@ -1,0 +1,46 @@
+if(Inventory.contains(CLUE_ID) || Inventory.contains(CLUE_RIDDLE_ID)){
+			Tile cluespot = new Tile(TILE_COORDS);
+			Path path = Walking.findPath(cluespot);
+			NPC npc = Npcs.getNearest(NPC_ID);
+			
+	
+				
+				if(cluespot.distance() > 15){
+					LogHandler.log("Walking to digspot");
+					path.traverse();
+					Time.sleep(600, 1200);	
+					};
+		
+					if(cluespot.distance() < 15){	LogHandler.log("Arrived at Digspot");
+						LogHandler.log("Arrived at Clue location");
+						Time.sleep(1000,1500);
+						LogHandler.log("speaking to npc");
+						npc.interact("Talk-to");
+						Time.sleep(1000,1500);
+						Keyboard.pressKey(space);
+						Time.sleep(100);
+						Keyboard.releaseKey(space);
+						Time.sleep(1000,1500);
+						npc.interact("Talk-to");
+						Time.sleep(1000,1500);
+						Keyboard.pressKey(space);
+						Time.sleep(100);
+						Keyboard.releaseKey(space);
+						Time.sleep(1000,1500);
+						Keyboard.sendText("RIDDLE_ANSWER", true);
+						Time.sleep(1000,1500);
+						Keyboard.pressKey(space);
+						Time.sleep(1000,1500);
+						Keyboard.releaseKey(space);
+						Time.sleep(1000,1500);
+						
+						if(!Inventory.contains(CLUE_ID) && !Inventory.contains(RIDDLE_ID)){
+							LogHandler.log("Step Completed!");
+		
+
+		}
+		
+		
+		
+		
+	

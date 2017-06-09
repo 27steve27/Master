@@ -1,0 +1,121 @@
+package main;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+import java.awt.Frame;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.GridLayout;
+import javax.swing.JRadioButton;
+import javax.swing.JLabel;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import javax.swing.JToggleButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JButton;
+
+public class DreamCows extends JFrame {
+
+
+	
+
+	private JPanel contentPane;
+	private static main ctx;
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					DreamCows frame = new DreamCows(ctx);
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public DreamCows(main ctx) {
+		this.ctx = ctx;
+		
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 162, 208);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		GridBagLayout gbl_contentPane = new GridBagLayout();
+		gbl_contentPane.columnWidths = new int[]{0, 0};
+		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
+		gbl_contentPane.columnWeights = new double[]{0.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		contentPane.setLayout(gbl_contentPane);
+		
+		JLabel lblCollectCowHides = new JLabel("Collect Cow Hides?");
+		GridBagConstraints gbc_lblCollectCowHides = new GridBagConstraints();
+		gbc_lblCollectCowHides.insets = new Insets(0, 0, 5, 0);
+		gbc_lblCollectCowHides.anchor = GridBagConstraints.WEST;
+		gbc_lblCollectCowHides.gridx = 0;
+		gbc_lblCollectCowHides.gridy = 0;
+		contentPane.add(lblCollectCowHides, gbc_lblCollectCowHides);
+		
+		JRadioButton rdbtnYes = new JRadioButton("Yes");
+		rdbtnYes.setSelected(true);
+		GridBagConstraints gbc_rdbtnYes = new GridBagConstraints();
+		gbc_rdbtnYes.insets = new Insets(0, 0, 5, 0);
+		gbc_rdbtnYes.gridx = 0;
+		gbc_rdbtnYes.gridy = 1;
+		contentPane.add(rdbtnYes, gbc_rdbtnYes);
+		
+		
+		
+		JRadioButton rdbtnNo = new JRadioButton("No");
+		GridBagConstraints gbc_rdbtnNo = new GridBagConstraints();
+		gbc_rdbtnNo.insets = new Insets(0, 0, 5, 0);
+		gbc_rdbtnNo.gridx = 0;
+		gbc_rdbtnNo.gridy = 2;
+		contentPane.add(rdbtnNo, gbc_rdbtnNo);
+		
+		JButton btnStart = new JButton("Start");
+		btnStart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+
+			}
+		});
+		GridBagConstraints gbc_btnStart = new GridBagConstraints();
+		gbc_btnStart.gridx = 0;
+		gbc_btnStart.gridy = 4;
+		contentPane.add(btnStart, gbc_btnStart);
+		
+		rdbtnYes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(rdbtnYes.isSelected()){
+					rdbtnNo.setSelected(false);
+					ctx.cows = true;
+				}
+			}
+		});
+		
+		rdbtnNo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(rdbtnNo.isSelected()){
+					rdbtnYes.setSelected(false);
+				}
+			}
+		});
+		
+
+		
+		
+	}
+
+}

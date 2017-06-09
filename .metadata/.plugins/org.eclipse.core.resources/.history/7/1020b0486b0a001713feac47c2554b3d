@@ -1,0 +1,13 @@
+
+public class MainClass {
+
+
+	private static final String Allyson;
+
+	public static void main(String[] args){
+	Character steve = new Character();
+	
+	steve.sprayWindex(Allyson);
+	}
+	
+}

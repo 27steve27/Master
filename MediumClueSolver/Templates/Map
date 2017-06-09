@@ -1,0 +1,20 @@
+		if(Inventory.contains(CLUE_ID)){
+			Tile cluespot = new Tile(TILE_COORDINATE; 
+			Path path = Walking.findPath(cluespot);
+			
+			if(cluespot.distance() != 0){
+				LogHandler.log("Walking to digspot");
+				path.traverse();
+				Time.sleep(600, 1200);	
+				};
+				if(cluespot.distance() == 0){	LogHandler.log("Arrived at Digspot");
+				Time.sleep(1000,1500);
+				LogHandler.log("Gonna try and dig");
+				spade.interact("Dig");
+			
+					if(!Inventory.contains(CLUE_ID)){
+						LogHandler.log("Step Completed!");
+		
+					}
+			}
+		}

@@ -1,0 +1,9 @@
+
+public class Character {
+
+	public void sprayWindex(){
+		System.out.println("Windex was sprayed");
+	}
+	
+	
+}
