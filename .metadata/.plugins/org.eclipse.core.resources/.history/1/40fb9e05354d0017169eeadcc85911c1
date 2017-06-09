@@ -15,15 +15,11 @@ public class Main extends AbstractScript {
 
 public int currentstate;
 public boolean cowhides;
-public String weapon;
-
-
 
 public Area cows = new Area(3023, 3313, 3043, 3300);
 public Area lumbridge = new Area(3217, 3224, 3226, 3214);
 	public void onStart() {
 		currentstate = 1;
-		weapon = "Event rpg";
 		log("Thank you for killing the cows");
 	}
 	
@@ -54,9 +50,6 @@ public Area lumbridge = new Area(3217, 3224, 3226, 3214);
 		
 		if(lumbridge.contains(getLocalPlayer())){
 			log("we're in lumbridge, deathwalking back");
-			if(getInventory().contains(weapon)){
-				getInventory().getRandom(weapon).interact();
-			}
 			currentstate = 3;
 			break;
 		}
@@ -67,18 +60,18 @@ public Area lumbridge = new Area(3217, 3224, 3226, 3214);
 			antiBan();
 		}else{
 
-		/*if(getGroundItems().closest("Cowhide") != null){
+		if(getGroundItems().closest("Cowhide") != null){
 		log("cowhide spotted, looting");
 			getGroundItems().closest("Cowhide").interact("Take");
 		sleepUntil(() -> getLocalPlayer().isStandingStill(), Calculations.random(1200, 3000));}
-		*/
+		}
 			NPC cow;
 			cow = getNpcs().closest(npc -> npc != null && npc.getName() != null && npc.getName().equals("Cow") && !npc.isInCombat() && npc.getInteractingCharacter() == null);
 			if(cow != null && !cow.isInCombat() && !getPlayers().myPlayer().isInCombat()){
 				log("cows here, trying to attack");
 				cow.interact("Attack");
 			}
-		}
+		
 		
 		
 		if(getInventory().isFull()){
