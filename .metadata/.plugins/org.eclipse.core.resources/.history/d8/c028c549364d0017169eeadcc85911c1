@@ -1,10 +1,6 @@
 package core;
 
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.util.concurrent.TimeUnit;
-
 import org.dreambot.api.methods.Calculations;
 import org.dreambot.api.methods.map.Area;
 import org.dreambot.api.methods.skills.Skill;
@@ -19,25 +15,12 @@ public class Main extends AbstractScript {
 
 public int currentstate;
 public boolean cowhides;
-public String weapon;
-
-private long timeBegan;
-private long timeRan;
-private int beginningXP;
-private int currentXp;
-private int xpGained;
-
-
 
 public Area cows = new Area(3023, 3313, 3043, 3300);
 public Area lumbridge = new Area(3217, 3224, 3226, 3214);
 	public void onStart() {
-		currentstate = 3;
-		weapon = "Event rpg";
-		beginningXP = getSkills().getExperience(Skill.STRENGTH);
-
+		currentstate = 1;
 		log("Thank you for killing the cows");
-		   timeBegan = System.currentTimeMillis();
 	}
 	
 	private enum State {
@@ -64,13 +47,9 @@ public Area lumbridge = new Area(3217, 3224, 3226, 3214);
 		switch (getState()) {
 		case FIGHT:
 		
-			if(getInventory().contains(weapon)){
-				getInventory().interact(weapon, "Wield");
-			}	
-			
+		
 		if(lumbridge.contains(getLocalPlayer())){
 			log("we're in lumbridge, deathwalking back");
-
 			currentstate = 3;
 			break;
 		}
@@ -130,7 +109,7 @@ public Area lumbridge = new Area(3217, 3224, 3226, 3214);
 			}
 			break;
 		case WAIT:
-
+//code to wait here
 			break;
 		}
 		return Calculations.random(500, 600);
@@ -165,42 +144,5 @@ public Area lumbridge = new Area(3217, 3224, 3226, 3214);
 		}
 	}
 	
-    public void onPaint(Graphics g)
-    {
-    g.setColor(Color.CYAN);
-    g.fillRect(1, 1, 125, 60);
-    
-    
-    currentXp = getSkills().getExperience(Skill.STRENGTH);
-    xpGained = currentXp - beginningXP;
-   
-
-    timeRan = System.currentTimeMillis() - this.timeBegan;
-    g.setColor(Color.WHITE);
-    g.drawString("Strenght xp gained: " + xpGained, 1, 40);
-    g.drawString("RunTime: " + ft(timeRan), 1, 15);
-    
-    }
-	
-    private String ft(long duration)
-    {
-            String res = "";
-            long days = TimeUnit.MILLISECONDS.toDays(duration);
-            long hours = TimeUnit.MILLISECONDS.toHours(duration)
-            - TimeUnit.DAYS.toHours(TimeUnit.MILLISECONDS.toDays(duration));
-            long minutes = TimeUnit.MILLISECONDS.toMinutes(duration)
-            - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS
-            .toHours(duration));
-            long seconds = TimeUnit.MILLISECONDS.toSeconds(duration)
-            - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS
-            .toMinutes(duration));
-            if (days == 0) {
-            res = (hours + ":" + minutes + ":" + seconds);
-            } else {
-            res = (days + ":" + hours + ":" + minutes + ":" + seconds);
-            }
-            return res;
-    }
 }
-
 	
